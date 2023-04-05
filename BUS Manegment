@@ -1,435 +1,537 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-char ch[10][130]={"Jude Express","Adones Liner","Bicol Express","Sax Bus Lines","Phil Express"};
-char name[32][100]={'\0'};
-char number[32][2]={'\0'};
-int num1[32]={0};
-int trno;
-void bus();
-void name_number(int booking,char numstr[100]);
-void booking();
-int read_number(int trno);
-void read_name(int trno);
-void status();
-void status_1(int trno);
-void cancle();
-
-int main()
-{
-	login();
-    int num,i;
-    do{
-    system("cls");
-    printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("\t    BUS RESERVATION");
-    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-    printf("   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd  MAIN MENU  \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-    printf("   [1] View Bus List\n\n");
-    printf("   [2] Book Tickets\n\n");
-    printf("   [3] Cancel Booking\n\n");
-    printf("   [4] Bus Status Board\n\n");
-    printf("   [5] Exit\n\n");
-    printf("   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("   ENTER YOUR CHOICE: ");
-    scanf("%d",&num);
-    switch(num)
-    {
-    case 1:
-        bus();//for list of bus
-        break;
-    case 2:
-        booking();//for booking the tickets
-        break;
-    case 3:
-        cancle();
-        break;
-    case 4:
-        status();
-        break;
-    }
-getch();
-    }while(num != 5);
-    system("CLS");
-    printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("   THANK YOU FOR USING THIS BUS RESERVATION SYSTEM");
-    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("   ITSourceCode.com");
-    getch();
-    return 0;
-}
-
-
+#include<stdio.h>
+#include<time.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<dos.h>
+extern int i,randloop,buschoosen,num;
+int seat;
 void bus()
 {
-    system("cls");
-    printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("\t    BUS RESERVATION");
-    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-    printf("   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd  BUS LIST  \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd \n\n");
-    printf("   [1]  =>  %s\n\n",ch[0]);
-    printf("   [2]  =>  %s\n\n",ch[1]);
-	printf("   [3]  =>  %s\n\n",ch[2]);
-	printf("   [4]  =>  %s\n\n",ch[3]);
-	printf("   [5]  =>  %s\n\n",ch[4]);
-}
-
-void booking()
-{
-
-    int i=0;
-    char numstr[100];
-system("cls");
-printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-printf("\t    BUS RESERVATION");
-printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-bus();//for seeing train least
-printf("   ENTER THE BUS NUMBER: ");
-scanf("%d",&trno);
-system("cls");
-printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-printf("\t    BUS RESERVATION");
-printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-printf("Your Bus Number is %d ********** %s",trno,ch[trno-1]);
-status_1(trno);
- FILE *f1, *fopen();//for reading the seats from the user.
- char str1[80]="32",str2[4],str3[4];
- int seat1,seat2,booking=0;
-if(trno == 1)
-{
- f1 = fopen("tr1.txt","r+");
- fgets(str1,80,f1);
- fclose(f1);
-}else if(trno == 2)
-{
- f1 = fopen("tr2.txt","r+");
- fgets(str1,80,f1);
- fclose(f1);
-}else if(trno == 3)
-{
- f1 = fopen("tr3.txt","r+");
- fgets(str1,80,f1);
- fclose(f1);
-}
-else if(trno == 4)
-{
- f1 = fopen("tr4.txt","r+");
- fgets(str1,80,f1);
- fclose(f1);
-}
-else if(trno == 5)
-{
- f1 = fopen("tr5.txt","r+");
- fgets(str1,80,f1);
- fclose(f1);
-}
-seat1=atoi(str1);//covert the string into number
-if(seat1 <= 0)
-{
- printf("There is no blank seat in this bus ");
-}else
-{
-printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-printf("\n   AVAILABLE SEATS: %d\n",seat1);
-printf("\n   NUMBER OF TICKETS: ");
-scanf("%d",&booking);
-printf("\n");
-
-seat1=seat1-booking;
-itoa(trno,numstr,10);
-name_number(booking,numstr);
-printf("   The Total booking amount is %d",200*booking);
-itoa(seat1, str1, 10);
-//for reading the seats from the user.
-if(trno == 1)
-{
- f1 = fopen("tr1.txt","w");
- fputs(str1,f1);
- fclose(f1);
-}
-else if(trno == 2)
-{
- f1 = fopen("tr2.txt","w");
- fputs(str1,f1);
-  fclose(f1);
-}
-else if(trno == 3)
-{
- f1 = fopen("tr3.txt","w");
- fputs(str1,f1);
-  fclose(f1);
-}
-else if(trno == 4)
-{
- f1 = fopen("tr4.txt","w");
- fputs(str1,f1);
-  fclose(f1);
-}
-else if(trno == 5)
-{
- f1 = fopen("tr5.txt","w");
- fputs(str1,f1);
- fclose(f1);
-}
-}
-}
-
-
-
-void name_number(int booking,char numstr[100])
-{
-char tempstr[100],tempstr1[12]="status",tempstr2[12]="number";
-int number;
-    FILE *a,*b;
-    int i=0;
-   strcat(numstr,".txt");
-   strcat(tempstr1,numstr);
-   strcat(tempstr2,numstr);
-   a = fopen(tempstr1,"a");//for open the file to write the name in the file
-   b = fopen(tempstr2,"a");//for open the file for writing the number in the file
-for(i=0; i<booking; i++)//for entering the person name and seat number in the file
-{
-      printf("   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd Enter the details for ticket no %d \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n",i+1);
-      printf("   ENTER THE SEAT NUMBER: ");
-      scanf("%d",&number);
-      printf("\n   ENTER THE PERSON NAME: ");
-      scanf("%s",name[number-1]);
-      printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-      printf("\n");
-      itoa(number, tempstr, 10);
-      fprintf(a,"%s ",name[number-1]);
-      fprintf(b,"%s ",tempstr);
-
-}
-fclose(a);
-fclose(b);
-}
-
-
-
-int read_number(int trno)//for putting the numeric value in the array
-{
-char tempstr[100],tempstr2[12]="number";
-FILE *a,*b;
-char numstr[100];
-int i=0,j=0,k;
-itoa(trno,numstr,10);
-strcat(numstr,".txt");
-strcat(tempstr2,numstr);
-a = fopen(tempstr2,"a+");//for open the file to write the name in the file
-   while(!feof(a))
-   {
-      number[i][j] = fgetc(a);
-
-      if(number[i][j] == ' ')
-      {
-          j=0;
-          i++;
-      }
-      else
-      {
-      j++;
-      }
-   }
-   k=i;
-   for(i=0; i<k; i++)
-   {
-       num1[i] = atoi(number[i]);
-   }
-   fclose(a);
-   return k;
-}
-
-
-void read_name(int trno)//for putting the numeric value in the array
-{
-char tempstr1[12]="status";
-FILE *b;
-char numstr[100];
-int i=0,j=0,k=0;
-itoa(trno,numstr,10);
-strcat(numstr,".txt");
-strcat(tempstr1,numstr);
-b = fopen(tempstr1,"a+");//for open the file to write the name in the file
-   while(!feof(b))
-   {
-      name[i][j] = fgetc(b);
-
-      if(name[i][j] == ' ')
-      {
-          j=0;
-          i++;
-      }
-      else
-      {
-        j++;
-      }
-
-   }
-   name[i][j]='\0';
-   k=i;
-   fclose(b);
-}
-
-void status()
-{
-system("cls");
-    printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("\t\t      BUS RESERVATION");
-    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-    int i,trno,index=0,j;
-    printf("   ENTER THE BUS NUMBER: ");
-    scanf("%d",&trno);
-    j=read_number(trno);
-    read_name(trno);
-    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("\t\t   Bus No.%d: %s\n",trno,ch[trno-1]);
-    printf("   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-    char tempname[33][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty "};
-    for(i=0; i<j; i++)
-    {
-        strcpy(tempname[num1[i]],name[i]);
-    }
-    for(i=0; i<8; i++)
-    {
-        printf("   ");
-        for(j=0; j<4; j++)
-            {
-        printf("%d.%s\t",index+1,tempname[index+1]);
-        index++;
-            }
-            printf("\n");
-    }
-}
-
-void status_1(int trno)
-{
-    printf("Your Bus Number is %d ********** %s",trno,ch[trno-1]);
-    system("cls");
-    printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("\t\t      BUS RESERVATION");
-    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-    int i,index=0,j;
-    j=read_number(trno);
-    read_name(trno);
-    char tempname[33][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty "};
-    for(i=0; i<j; i++)
-    {
-        strcpy(tempname[num1[i]],name[i]);
-    }
-    for(i=0; i<8; i++)
-    {
-        printf("   ");
-        for(j=0; j<4; j++)
-            {
-        printf("%d.%s\t",index+1,tempname[index+1]);
-        index++;
-            }
-            printf("\n");
-}
-}
-
-
-void cancle()
-{
- int seat_no,i,j;
- char numstr[100],tempstr2[15]="number",tempstr1[15]="status";
- printf("\n   ENTER THE BUS NUMBER: ");
- scanf("%d",&trno);
- itoa(trno,numstr,10);
- strcat(numstr,".txt");
- strcat(tempstr1,numstr);
- strcat(tempstr2,numstr);
- read_number(trno);
- read_name(trno);
- status_1(trno);
- printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
- printf("   ENTER THE SEAT NUMBER: ");
- scanf("%d",&seat_no);
- FILE *a,*b;
- a = fopen(tempstr1,"w+");
- b = fopen(tempstr2,"w+");
- for(i=0; i<32; i++)
+ srand(time(0));
+ seat=rand()%30;
+ printf("\n--------------------------------------------------------------------------------\n");
+ printf("Busses Available between this route : ");
+ printf("\n--------------------------------------------------------------------------------");
+ for(i=0;i<randloop;i++)
  {
-     if(num1[i] == seat_no)
-     {
-         for(j=0; j<32; j++)
-         {
-             if(num1[j] != seat_no && num1[j] != 0)
-             {
-                 fprintf(b,"%d ",num1[j]);
-                 fprintf(a,"%s",name[j]);
-             }
-             else if(num1[j] == seat_no && num1[j] != 0)
-             {
-                 strcpy(name[j],"Empty ");
-             }
-         }
-     }
+ printf("\n%d - BUS NUMBER -  %dBCT%d : PICKUP TIME - %d:%d%d ",i+1,rand()%60,rand()%40,rand()%23,rand()%6,rand()%9);
  }
-fclose(a);
-fclose(b);
-printf("\n\n");
-    printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
- printf("   Your 200 pesos has been Returned\n");
-    printf("   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
+ printf("\n--------------------------------------------------------------------------------\n");
+ printf("Choose your choice : \t");
+ printf("\n--------------------------------------------------------------------------------\n");
+ scanf("%d",&buschoosen);
+ if(seat<num)
+ {
+//  clrscr();
+  printf("\n--------------------------------------------------------------------------------\n");
+  printf("\n\n\n\n\n\n\n\t\t    Booking Failed...\n\t\t    Sorry only %d seat is available in selected bus.......\n\n\t\t    Birth Cannot be Alloted.....\n\n\t\t    Sorry for your inconvineance ",seat);
+  printf("\n\n\n\n\n\n\n--------------------------------------------------------------------------------\n");
+
+  getch();
+  exit(0);
+ }
+ return;
 }
 
+extern int num;
+void form(int price)
+{
+ int total,k;
+ int *n=&num ;
+// clrscr();
+ printf("\n--------------------------------------------------------------------------------\n");
+ printf("\t\t       Number of pessanger : ");
+ printf("\n--------------------------------------------------------------------------------\n");
+ scanf("%d",n);
+ total=price * num;
+// clrscr();
+ printf("\n--------------------------------------------------------------------------------\n");
+ printf("Total amount of ticket will be %d ",total);
+ printf("\n--------------------------------------------------------------------------------\n");
+ printf("\n\n\n\n Press : 1 : if you want to proceed with book ticket : ");
+ printf("\n--------------------------------------------------------------------------------\n");
+ scanf("%d",&k);
+// clrscr();
+ if(k==1)
+ return;
+}
 
-void login()
+int num;
+int opt,price,from,route,distance,classofbus;
+int choosenclass,randloop,i,buschoosen;
+void payment(int price);
+void form(int price);
+int main()
 {
-	int a=0,i=0;
-    char uname[10],c=' ';
-    char pword[10],code[10];
-    char user[10]="user";
-    char pass[10]="user";
-    do
-{
-	system("cls");
-    printf("\n\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n");
-    printf("\t    BUS RESERVATION");
-    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\n\n");
-    printf("   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd  LOGIN FORM  \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd  ");
-    printf("\n\n   ENTER USERNAME: ");
-	scanf("%s", &uname);
-	printf(" \n   ENTER PASSWORD: ");
-	while(i<10)
-	{
-	    pword[i]=getch();
-	    c=pword[i];
-	    if(c==13) break;
-	    else printf("*");
-	    i++;
-	}
-	pword[i]='\0';
-	//char code=pword;
-	i=0;
-	//scanf("%s",&pword);
-		if(strcmp(uname,"user")==0 && strcmp(pword,"user")==0)
-	{
-    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd");
-	printf("  \n\n   WELCOME USER !!!!");
-	printf("\n\n\n   Press any key to continue...");
-	getch();//holds the screen
-	break;
-	}
+
+ srand(time(0));
+ randloop=rand()%13;
+ A:
+// clrscr();
+ printf("\n\t Welcome to SWBCTC - Storm Walker Bus council of Ticket Corporation\t\t\n " );
+ printf("\n 1 . Search Your Ticket");
+ printf("\n 2 . Show all buses list ");
+ printf("\n 3 . Price list ");
+ printf("\n 4 . Exit \t");
+ scanf("%d",&opt);
+ switch(opt)
+ {
+  case 1 :
+//	clrscr();
+	printf("\n--------------------------------------------------------------------------------\n");
+	printf("In which class you want your journey : \n\t\t1. AC\n\t\t2. Non - AC");
+	printf("\n--------------------------------------------------------------------------------\n");
+	scanf("%d",&choosenclass);
+	if(choosenclass==1)
+	classofbus=6;
 	else
+	classofbus=3;
+//	clrscr();
+	printf("\n--------------------------------------------------------------------------------\n");
+	printf("FROM : ");
+	printf("\n--------------------------------------------------------------------------------\n");
+	printf("\n\t1 . Ludhiyana-LDI");
+	printf("\n\t2 . Phagwara-PHW");
+	printf("\n\t3 . Chandigarh-CN");
+	printf("\n\t4 . Ambala-ABL");
+	printf("\n\t5 . Jalandhar-JD");
+	printf("\n\t6 . Pathankot-PTK");
+	printf("\n\t7 . Bundel-BDL");
+	printf("\n\t8 . Back to Main Manu\t ");
+	scanf("%d",&from);
+//	clrscr();
+	switch(from)
 	{
-	    printf("\n   \xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd\xcd");
-		printf("\n\n   LOGIN IS UNSUCESSFUL...PLEASE TRY AGAIN...");
-		a++;
+	 case 1 :
+		printf("\n--------------------------------------------------------------------------------");
+		printf("Available roots from Ludhiyana : ");
+		printf("\n--------------------------------------------------------------------------------\n");
+		printf("\n 1 . Ludhiyana to Chandigarh ");
+		printf("\n 2 . Ludhiyana to Phagwara");
+		printf("\n 3 . Ludhiyana to Pathankot");
+		printf("\n 4 . Ludhiyana to Ambala \t");
+		scanf("%d",&route);
+//		clrscr();
+		switch(route)
+		{
+		 case 1:
+			distance = 128;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 2:
+			distance =  40;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 3:
+			distance =  171;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 4:
+			distance =  116;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 }
+	 case 2 :
+		printf("\n Available roots from Phagwara : ");
+		printf("\n 1 . Phagwara to Chandigarh ");
+		printf("\n 2 . Phagwara to Ludhiyana");
+		printf("\n 3 . Phagwara to Pathankot");
+		printf("\n 4 . Phagwawa to Ambala");
+		printf("\n 5 . Phagwara to Bundel");
+		scanf("%d",&route);
+//		clrscr();
+		switch(route)
+		{
+		 case 1:
+			distance =  126;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 2:
+			distance = 40;
+			price = distance*classofbus ;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 3:
+			distance =  133;
+			price = distance*classofbus ;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 4:
+			distance =  150;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 5:
+			distance = 342;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 }
+	 case 3 :
+		printf("\n Available roots from Chandigarh : ");
+		printf("\n 1 . Chandigarh to Jalandhar ");
+		printf("\n 2 . Chandigarh to Ludhiyana");
+		printf("\n 3 . Chandigarh to Pathankot");
+		printf("\n 4 . Chandigarh to Ambala");
+		printf("\n 5 . Chandigarh to Phagwara");
+		scanf("%d",&route);
+//		clrscr();
+		switch(route)
+		{
+		 case 1:
+			distance =  148;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 2:
+			distance = 128;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 3:
+			distance = 233;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 4:
+			distance = 46;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 5:
+			distance = 126;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 }
+	 case 4 :
+		printf("\n Available roots from Ambala : ");
+		printf("\n 1 . Ambala to Chandigarh ");
+		printf("\n 2 . Ambala to Ludhiyana");
+		printf("\n 3 . Ambala to Pathankot");
+		printf("\n 4 . Ambala to Phagwara");
+		printf("\n 5 . Ambala to Jalandhar");
+		scanf("%d",&route);
+//		clrscr();
+		switch(route)
+		{
+		 case 1:
+			distance = 46;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 2:
+			distance = 116;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 3:
+			distance =  290;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 4:
+			distance =  150;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 5:
+			distance = 180;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 }
+	 case 5 :
+		printf("\n Available roots from Jalandhar : ");
+		printf("\n 1 . Jalandhar to Chandigarh ");
+		printf("\n 2 . Jalandhar to Ludhiyana");
+		printf("\n 3 . Jalandhar to Pathankot");
+		printf("\n 4 . Jalandhar to Ambala");
+		printf("\n 5 . Jalandhar to Phagwara");
+		scanf("%d",&route);
+//		clrscr();
+		switch(route)
+		{
+		 case 1:
+			distance =  148;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 2:
+			distance = 62;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 3:
+			distance = 114;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 4:
+			distance = 180;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			scanf("%d",&buschoosen);
+			payment(price);
+			exit(0);
+		 case 5:
+			distance = 30;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 }
+	 case 6 :
+		printf("\n Available roots from Pathankot : ");
+		printf("\n 1 . Pathankot to Chandigarh ");
+		printf("\n 2 . Pathankot to Ludhiyana");
+		printf("\n 3 . Pathankot to Jalandhar");
+		printf("\n 4 . Pathankot to Ambala");
+		printf("\n 5 . Pathankot to Phagwara");
+		scanf("%d",&route);
+//		clrscr();
+		switch(route)
+		{
+		 case 1:
+			distance = 233;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 2:
+			distance = 171;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 3:
+			distance =  114;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 4:
+			distance = 290;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 5:
+			distance =  133;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 }
+	 case 7 :
+		printf("\n Available roots from Phagwara : ");
+		printf("\n 1 . Bundel to Chandigarh ");
+		printf("\n 2 . Bundel to Ludhiyana");
+		printf("\n 3 . Bundel to Pathankot");
+		printf("\n 4 . Bundel to Ambala");
+		printf("\n 5 . Bundel to Jalandhar");
+		scanf("%d",&route);
+//		clrscr();
+		switch(route)
+		{
+		 case 1:
+			distance = 390 ;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			exit(0);
+		 case 2:
+			distance = 400;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 3:
+			distance = 307;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			exit(0);
+		 case 4:
+			distance = 382;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+		 case 5:
+			distance =  377;
+			price = distance*classofbus;
+			form(price);
+			bus();
+			fflush(stdin);
+			payment(price);
+			exit(0);
+			}
+		case 8:
+			goto A;
 
-		getch();//holds the screen
+		 }
+		 break;
 
-	}
+  case 2 :
+//	  clrscr();
+	  printf("\n--------------------------------------------------------------------------------\n");
+	  printf("Buses under AKBCTC service ");
+	  printf("\n--------------------------------------------------------------------------------");
+	  for(i=0;i<25;i++)
+	  {
+	   printf("\n%d - BUS NUMBER -  %dBCT%d",i+1,rand()%60,rand()%40);
+	  }
+	  break;
+  case 3 :
+	 printf("\n For AC seats 6 Rs. per Km per head ");
+	 printf("\n For Non-Ac seat 3 Rs. per Km per head ");
+	 break;
+
+ }
+ getch();
+ }
+
+
+void d()
+{
+ int delay;
+// clrscr();
+ for(delay=10;delay>=0;delay--)
+ {
+  printf("Please wait..... %d s",delay);
+  delay;
+//  clrscr();
+ }
 }
-	while(a<=2);
-	if (a>2)
-	{
-		printf("\nSorry you have entered the wrong username and password for four times!!!");
+extern int num;
+void payment(int price)
+{
+   int j,age[100],i;
+   char name[100][100];
+//   clrscr();
+   for(i=0;i<num;i++)
+   {
+   fflush(stdin);
+   printf("\n Enter name of %dth pessanger :",i+1);
+   gets(name[i]);
+   printf("\n Age of pessanger : ");
+   scanf("%d",&age);
+   }
+//   clrscr();
+  printf("\n-----------------------------------YOUR TICKET----------------------------------\n");
+  for(i=0;i<num;i++)
+  {
+  printf("\nName : %s\t\tAge : %d\t\tAmount : %d",name[i],age[i],price);
 
-		getch();
-
-		}
-		system("cls");
+  }
+  printf("\n--------------------------------------------------------------------------------\n");
+  printf("\n\n\n\t\t\t\t\tPress 1 to book ticket :");
+  printf("\n--------------------------------------------------------------------------------\n");
+  scanf("%d",&j);
+  if(j==1)
+  {
+  d();
+  printf("\n--------------------------------------------------------------------------------\n");
+  printf("\n\n\n\n\n\n\n\t\t    Booking Confirmed...\n\t\t    Your ticket will be send to your account.......\n\n\t\t    Birth Alloted : S%d\n\n\t\t    Thank you for booking ticket with SWBCTC ",rand()%100+1);
+  printf("\n\n\n\n\n\n\n--------------------------------------------------------------------------------\n");
+  }
+  else
+  {
+  printf("\n--------------------------------------------------------------------------------\n");
+  printf("\n Aborted");
+  printf("\n--------------------------------------------------------------------------------\n");
+  }
+  getch();
 }
